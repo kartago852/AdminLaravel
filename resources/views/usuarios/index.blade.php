@@ -17,6 +17,8 @@
                 <th scope="col">ID</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Email</th>
+                <th scope="col">Roles</th>
+                <th scope="col">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -25,10 +27,16 @@
                 <th scope="row">{{$user->id}}</th>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
-                <td><a href="{{ route('usuarios.edit', $user->id) }}"><button type="button" class="btn btn-primary">Editar</button></a></td>
-                <td><button type="button" class="btn btn-danger">Eliminar</button></td>
-                <td><a href="{{ route('usuarios.show', $user->id) }}"><button type="button" class="btn btn-secondary">Ver Informacion</button></a></td>
                 <td>
+                    @foreach ($user->roles as $role)
+                        {{$role->name}}
+                    @endforeach
+                </td>
+                <td>
+                    <a href="{{ route('usuarios.edit', $user->id) }}"><button type="button" class="btn btn-primary">Editar</button></a>
+                    <button type="button" class="btn btn-danger">Eliminar</button>
+                    <a href="{{ route('usuarios.show', $user->id) }}"><button type="button" class="btn btn-secondary">Ver Informacion</button></a>
+
                     <form action="{{ route('usuarios.destroy', $user->id) }}" method="POST">
                         @csrf
                         @method('DELETE')

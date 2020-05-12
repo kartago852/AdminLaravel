@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Role;
 use App\Http\Requests\UserFormRequest;
 class UserController extends Controller
 {
@@ -30,7 +31,9 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('usuarios.create');
+        $roles  = Role::all();
+
+        return view('usuarios.create',['roles' => $roles]);
     }
 
 
@@ -40,9 +43,11 @@ class UserController extends Controller
 
         $usuario->name = request('name');
         $usuario->email = request('email');
-        $usuario->password = request('password');
+        $usuario->password = bcrypt(request('password'));
 
         $usuario->save();
+
+        $usuario->asignarRole($request->get('rol'));
 
         return redirect('/usuarios');
     }

@@ -15,6 +15,15 @@
                     <input type="email" class="form-control" name="email" placeholder="Ingrese Email">
                 </div>
                 <div class="form-group">
+                    <label for="email">Rol</label>
+                    <select name="rol" class="form-control">
+                        <option selected disabled> Elige un rol para un usuario...</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" name="password" placeholder="Password">
                 </div>

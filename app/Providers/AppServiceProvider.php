@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,5 +27,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        Gate::before( function ($user, $role)
+        {
+                return $user->tieneRole()->contains($role);
+        });
     }
 }
