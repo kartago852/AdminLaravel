@@ -34,7 +34,6 @@
                 </td>
                 <td>
                     <a href="{{ route('usuarios.edit', $user->id) }}"><button type="button" class="btn btn-primary">Editar</button></a>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
                     <a href="{{ route('usuarios.show', $user->id) }}"><button type="button" class="btn btn-secondary">Ver Informacion</button></a>
 
                     <form action="{{ route('usuarios.destroy', $user->id) }}" method="POST">
